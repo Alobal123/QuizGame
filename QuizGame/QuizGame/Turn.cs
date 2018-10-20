@@ -10,14 +10,27 @@ namespace QuizGame
     {
         public string name { get; set; }
         private string dataFolder;
+        private int index = 0;
         private List<Question> questions = new List<Question>();
         
-
         public Turn(string dataFolder)
         {
             this.dataFolder = dataFolder;
             load_data();
         }
+        public List<Question> getQuestions()
+        {
+            return questions;
+        }
+
+        public Question getQuestion()
+        {
+            if (index < questions.Count)
+                return questions[index++];
+            else
+                return null;
+        }
+
 
         private void load_data()
         {

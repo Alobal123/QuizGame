@@ -1,7 +1,14 @@
-﻿namespace QuizGame
+﻿using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
+
+namespace QuizGame
 {
-    partial class Form1
+    partial class MainScreen
     {
+
+
+
         /// <summary>
         /// Vyžaduje se proměnná návrháře.
         /// </summary>
@@ -28,13 +35,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.TurnPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.SuspendLayout();
+            // 
+            // TurnPanel
+            // 
+            this.TurnPanel.Location = new System.Drawing.Point(21, 40);
+            this.TurnPanel.Name = "TurnPanel";
+            this.TurnPanel.Size = new System.Drawing.Size(849, 280);
+            this.TurnPanel.TabIndex = 0;
+ 
+            // 
+            // MainScreen
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(921, 485);
+            this.Controls.Add(this.TurnPanel);
+            this.Name = "MainScreen";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.FlowLayoutPanel TurnPanel;
     }
 }
 
