@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,6 +25,7 @@ namespace QuizGame
                 list[i] = value;
             }
         }
+        public static WebServer ws;
 
         /// <summary>
         /// Hlavní vstupní bod aplikace.
@@ -34,9 +37,14 @@ namespace QuizGame
             Application.SetCompatibleTextRenderingDefault(false);
 
             Game game = new Game(@"C:\Users\miros\Documents\QuizGame\GameData");
-  
+
+            ws = new WebServer("http://localhost:8080/" );
+            ws.Run();
+
             MainScreen form = new MainScreen(game);
             Application.Run(form);
         }
+
     }
+
 }

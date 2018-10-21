@@ -26,6 +26,18 @@ namespace QuizGame
             }
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Answer answer = Program.ws.get_Answer();
+            if(answer != null){
+                game.AddTeam(new Team(answer.TeamName, Color.Red));
+                teamLabel.Text += $"\n{answer.TeamName}";
 
+            }
+        }
+       public void stopTeamAdding()
+        {
+            timer1.Enabled = false;
+        }
     }
 }

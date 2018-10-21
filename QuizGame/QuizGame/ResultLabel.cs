@@ -10,13 +10,19 @@ using System.Windows.Forms;
 
 namespace QuizGame
 {
-    public partial class ResultLabel : UserControl
+    internal partial class ResultLabel : UserControl
     {
-        public ResultLabel(string answer)
+        public ResultLabel(string answer, List<Answer> answers)
         {
             
             InitializeComponent();
             this.rightAnswerLabel.Text = answer;
+            foreach (var a in answers)
+            {
+                rightAnswerLabel.Text += "\n";
+                rightAnswerLabel.Text += a.ToString();
+                
+            }
         }
     }
 }

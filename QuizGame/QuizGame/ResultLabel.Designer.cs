@@ -37,9 +37,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rightAnswerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rightAnswerLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rightAnswerLabel.Location = new System.Drawing.Point(30, 30);
             this.rightAnswerLabel.Name = "rightAnswerLabel";
-            this.rightAnswerLabel.Size = new System.Drawing.Size(740, 120);
+            this.rightAnswerLabel.Size = new System.Drawing.Size(740, 474);
             this.rightAnswerLabel.TabIndex = 0;
             this.rightAnswerLabel.Text = "label1";
             this.rightAnswerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

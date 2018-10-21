@@ -10,7 +10,7 @@ namespace QuizGame
     class Game
     {
         private string gameFolder;
-        private List<Team> teams = new List<Team>();
+        public static List<Team> teams = new List<Team>();
         private List<Turn> turns = new List<Turn>();
 
         public Game(string gameFolder)
@@ -24,10 +24,6 @@ namespace QuizGame
             teams.Add(team);
         }
 
-        public List<Team> getTeams()
-        {
-            return teams;
-        }
         public List<Turn> getTurns()
         {
             return turns;

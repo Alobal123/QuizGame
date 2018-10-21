@@ -18,6 +18,7 @@ namespace QuizGame
             this.Text = turn.name;
             this.Click += CreateTurnScreen;
             InitializeComponent();
+            
         }
 
         public TurnButton(IContainer container)
@@ -29,8 +30,8 @@ namespace QuizGame
 
         public void CreateTurnScreen(object sender, EventArgs e)
         {
+            ((MainScreen)Parent.Parent).stopTeamAdding();
             TurnScreen form = new TurnScreen(turn);
-            //Application.Run(form);
             form.ShowDialog();
             this.Enabled = false;
         }

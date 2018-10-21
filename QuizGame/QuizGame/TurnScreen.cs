@@ -21,13 +21,14 @@ namespace QuizGame
 
         private Turn turn;
         private State state = State.ready;
-        private int speed1 = 10;
+        private int speed1 = 850;
         private int speed2 = 1;
 
-        private int grid_width = 16;
+        private int grid_width =  16;
         private int grid_height = 9;
 
         private List<Point> hiddenIndices;
+        private List<Answer> answers;
         private Random rnd = new Random();
 
         private Image image;
@@ -60,6 +61,7 @@ namespace QuizGame
                     state = State.running;
                     timer.Interval = speed1;
                     Question question = turn.getQuestion();
+                    answers = new List<Answer>();
                     if(question == null)
                     {
                         this.Close();
@@ -79,7 +81,7 @@ namespace QuizGame
                 case State.eval:
                     this.state = State.ready;
                     this.resultLabel.Dispose();
-                    resetBoxes();
+                    ResetBoxes();
                     break;
                 default:
                     break;
@@ -88,6 +90,11 @@ namespace QuizGame
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            Answer newest = Program.ws.get_Answer();
+            if (newest != null)
+            {
+                answers.Add(newest);
+            }
             changePicture(); 
         }
 
@@ -106,7 +113,11 @@ namespace QuizGame
 
                 int x = image.Width / grid_width;
                 int y = image.Height / grid_height;
-                Image croppedImage = cropImage(this.image, new Rectangle(x*point.X, y*point.Y, x, y));
+
+                int dx = image.Width % grid_width;
+                int dy = image.Height % grid_height;
+
+                Image croppedImage = CropImage(this.image, new Rectangle(x*point.X, y*point.Y, x, y));
                 boxes[point.X, point.Y].Image = croppedImage;
             }
         }
@@ -127,14 +138,18 @@ namespace QuizGame
 
         private PictureBox[,] CreatePictureBoxes()
         {
+            int width = this.ClientRectangle.Width / this.grid_width;
+            int height = this.ClientRectangle.Height / this.grid_height;
             PictureBox[,] boxes = new PictureBox[grid_width,grid_height];
             for (int i = 0; i < grid_width; i++)
             {
                 for (int k = 0; k < grid_height; k++)
                 {
-                    PictureBox box = new PictureBox();
-                    box.Width = this.ClientRectangle.Width / this.grid_width;
-                    box.Height = this.ClientRectangle.Height / this.grid_height;
+                    PictureBox box = new PictureBox
+                    {
+                        Width = width,
+                        Height = height
+                    };
                     box.Location = new Point(i * box.Width, k * box.Height);
                     this.Controls.Add(box);
                     box.BackColor = Color.Black;
@@ -144,7 +159,7 @@ namespace QuizGame
             }
             return boxes;
         }
-        private void resetBoxes()
+        private void ResetBoxes()
         {
             foreach (var box in boxes)
             {
@@ -152,7 +167,7 @@ namespace QuizGame
             }
         }
 
-        private Image cropImage(Image img, Rectangle cropArea)
+        private Image CropImage(Image img, Rectangle cropArea)
         {
             Bitmap bmpImage = new Bitmap(img);
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
@@ -165,8 +180,8 @@ namespace QuizGame
         }
         private void ShowResult()
         {
-            ResultLabel label = new ResultLabel(this.answer);
-            label.Location = new Point(this.ClientRectangle.Width/4, this.ClientRectangle.Height/4);
+            ResultLabel label = new ResultLabel(this.answer, answers);
+            label.Location = new Point(this.ClientRectangle.Width/2 - label.Width/2, this.ClientRectangle.Height/2 - label.Height/2);
             this.Controls.Add(label);
             label.BringToFront();
             this.resultLabel = label;

@@ -35,7 +35,7 @@ namespace QuizGame
         private void load_data()
         {
             System.IO.StreamReader file =
-                new System.IO.StreamReader(dataFolder + "\\config.txt");
+                new System.IO.StreamReader(dataFolder + "\\config.txt", Encoding.GetEncoding("windows-1250"));
 
             name = file.ReadLine();
             string line;
