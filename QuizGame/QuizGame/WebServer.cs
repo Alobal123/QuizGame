@@ -6,6 +6,8 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using System.Web;
+using System.Text.RegularExpressions;
+
 namespace QuizGame
 {
     class WebServer
@@ -92,22 +94,29 @@ namespace QuizGame
 
         public string SendResponse(HttpListenerRequest request)
         {
-            answers.Add(ParseAnswer(request.Url));
-            
-            return MakeWebsite(request.Url);
+            Answer answer = ParseAnswer(request.Url);
+            if (answer != null)
+            {
+                answers.Add(answer);
+            }
+            return MakeWebsite(answer);
         }
 
-        private string MakeWebsite(Uri uri)
+        private string MakeWebsite(Answer answer)
         {
 
-            String line = "<HTML><BODY>My web page.<br>{0}</BODY></HTML>";
+            String line = "<HTML><BODY>My web page.<br></BODY></HTML>";
             using (StreamReader sr = new StreamReader(@"C:\Users\miros\Documents\QuizGame\GameData\page.html", Encoding.GetEncoding("windows-1250")))
             {
                 // Read the stream to a string, and write the string to the console.
-                line = sr.ReadToEnd();
+                line += sr.ReadToEnd();
 
             }
-            line += ParseAnswer(uri).ToString();
+            if (answer != null)
+              line = Regex.Replace(line, "__teamname__", answer.TeamName);
+            else
+               line = Regex.Replace(line, "__teamname__","");
+
             return line;
         }
 
@@ -115,6 +124,8 @@ namespace QuizGame
         {
             string teamName = HttpUtility.ParseQueryString(uri.Query).Get("team");
             string answerString = HttpUtility.ParseQueryString(uri.Query).Get("answer");
+            if (teamName == null)
+                return null;
             return new Answer(teamName, answerString);
         }
     }

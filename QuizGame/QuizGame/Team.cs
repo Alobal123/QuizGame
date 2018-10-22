@@ -24,6 +24,10 @@ namespace QuizGame
         {
             points += points;
         }
+        public override bool Equals(object obj)
+        {
+            return name == ((Team)obj).name;
+        }
 
 
     }

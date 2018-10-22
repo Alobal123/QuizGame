@@ -13,6 +13,18 @@ namespace QuizGame
         public static List<Team> teams = new List<Team>();
         private List<Turn> turns = new List<Turn>();
 
+        public static bool TeamExists(string name)
+        {
+            foreach (var team in teams)
+            {
+                if (team.name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public Game(string gameFolder)
         {
             this.gameFolder = gameFolder;

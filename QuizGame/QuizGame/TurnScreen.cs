@@ -25,7 +25,7 @@ namespace QuizGame
         private int speed2 = 1;
 
         private int grid_width =  16;
-        private int grid_height = 9;
+        private int grid_height = 12;
 
         private List<Point> hiddenIndices;
         private List<Answer> answers;
@@ -91,9 +91,14 @@ namespace QuizGame
         private void timer_Tick(object sender, EventArgs e)
         {
             Answer newest = Program.ws.get_Answer();
-            if (newest != null)
+            if (newest != null && !answers.Contains(newest) && Game.TeamExists(newest.TeamName))
             {
                 answers.Add(newest);
+                if(answers.Count == Game.teams.Count)
+                {
+                    this.state = State.showing;
+                    timer.Interval = speed2;
+                }
             }
             changePicture(); 
         }

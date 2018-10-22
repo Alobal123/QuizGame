@@ -29,7 +29,7 @@ namespace QuizGame
         private void timer1_Tick(object sender, EventArgs e)
         {
             Answer answer = Program.ws.get_Answer();
-            if(answer != null){
+            if(answer != null && !Game.TeamExists(answer.TeamName)){
                 game.AddTeam(new Team(answer.TeamName, Color.Red));
                 teamLabel.Text += $"\n{answer.TeamName}";
 

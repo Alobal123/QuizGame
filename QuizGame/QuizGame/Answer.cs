@@ -20,5 +20,9 @@ namespace QuizGame
         {
             return $"Team {TeamName} answered {AnswerString}.";
         }
+        public override bool Equals(object obj)
+        {
+            return TeamName == ((Answer)obj).TeamName;
+        }
     }
 }
