@@ -25,7 +25,7 @@ namespace QuizGame
         private int speed2 = 1;
 
         private int grid_width =  16;
-        private int grid_height = 12;
+        private int grid_height = 10;
 
         private List<Point> hiddenIndices;
         private List<Answer> answers;
@@ -43,6 +43,7 @@ namespace QuizGame
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
             this.Text = turn.name;
+            this.BackColor = Color.Black;
             this.turn = turn;
 
             InitializeComponent();
@@ -54,21 +55,24 @@ namespace QuizGame
             switch (state)
             {
                 case State.ready:
-                    if (this.boxes == null)
-                    {
-                        this.boxes = CreatePictureBoxes();
-                    }
-                    state = State.running;
-                    timer.Interval = speed1;
+
                     Question question = turn.getQuestion();
                     answers = new List<Answer>();
-                    if(question == null)
+                    if (question == null)
                     {
                         this.Close();
                         break;
                     }
                     this.answer = question.Answer;
                     this.image = Image.FromFile(question.Path);
+
+                    if (this.boxes == null)
+                    {
+                        this.boxes = CreatePictureBoxes();
+                    }
+                    state = State.running;
+                    timer.Interval = speed1;
+                    this.BackgroundImage = this.image;
                     this.hiddenIndices = getAllIndices(grid_width, grid_height);
                     timer.Enabled = true;
                     break;
@@ -96,7 +100,7 @@ namespace QuizGame
                 answers.Add(newest);
                 if(answers.Count == Game.teams.Count)
                 {
-                    this.state = State.showing;
+                    this.state = State.showing; 
                     timer.Interval = speed2;
                 }
             }
@@ -115,15 +119,17 @@ namespace QuizGame
             {
                 Point point = hiddenIndices[0];
                 hiddenIndices.RemoveAt(0);
-
+                /*
                 int x = image.Width / grid_width;
                 int y = image.Height / grid_height;
 
                 int dx = image.Width % grid_width;
                 int dy = image.Height % grid_height;
-
-                Image croppedImage = CropImage(this.image, new Rectangle(x*point.X, y*point.Y, x, y));
-                boxes[point.X, point.Y].Image = croppedImage;
+                Image croppedImage;
+                croppedImage = CropImage(this.image, new Rectangle(x * point.X, y * point.Y, x, y));
+                boxes[point.X, point.Y].Image = croppedImage;*/
+                boxes[point.X, point.Y].BackColor = Color.FromArgb(0, 88, 44, 100);
+                //this.Controls.Remove(boxes[point.X, point.Y]);
             }
         }
 
@@ -166,9 +172,10 @@ namespace QuizGame
         }
         private void ResetBoxes()
         {
+
             foreach (var box in boxes)
             {
-                box.Image = null;
+                box.BackColor = Color.Black;
             }
         }
 
