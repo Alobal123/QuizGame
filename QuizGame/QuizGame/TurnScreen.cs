@@ -30,14 +30,14 @@ namespace QuizGame
         private List<Point> hiddenIndices;
         private List<Answer> answers;
         private Random rnd = new Random();
-
+        private MainScreen mainscreen;
         private Image image;
         private string answer;
         private ResultLabel resultLabel;
+        
+        Label[,] boxes = null;
 
-        PictureBox[,] boxes = null;
-
-        internal TurnScreen(Turn turn)
+        internal TurnScreen(Turn turn, MainScreen mainscreen)
         {
 
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -45,12 +45,13 @@ namespace QuizGame
             this.Text = turn.name;
             this.BackColor = Color.Black;
             this.turn = turn;
-
+            this.mainscreen = mainscreen;
+            this.MouseClick += TurnScreen_Click;
             InitializeComponent();
 
         }
 
-        private void TurnScreen_Click(object sender, EventArgs e)
+        public void TurnScreen_Click(object sender, EventArgs e)
         {
             switch (state)
             {
@@ -68,7 +69,7 @@ namespace QuizGame
 
                     if (this.boxes == null)
                     {
-                        this.boxes = CreatePictureBoxes();
+                        this.boxes = CreateLabeles();
                     }
                     state = State.running;
                     timer.Interval = speed1;
@@ -84,6 +85,8 @@ namespace QuizGame
                     break;
                 case State.eval:
                     this.state = State.ready;
+                    this.resultLabel.countPoints();
+                    mainscreen.ShowPoints();
                     this.resultLabel.Dispose();
                     ResetBoxes();
                     break;
@@ -95,7 +98,7 @@ namespace QuizGame
         private void timer_Tick(object sender, EventArgs e)
         {
             Answer newest = Program.ws.get_Answer();
-            if (newest != null && !answers.Contains(newest) && Game.TeamExists(newest.TeamName))
+            if (newest != null && !answers.Contains(newest) && Game.teams.ContainsKey(newest.TeamName))
             {
                 answers.Add(newest);
                 if(answers.Count == Game.teams.Count)
@@ -119,17 +122,7 @@ namespace QuizGame
             {
                 Point point = hiddenIndices[0];
                 hiddenIndices.RemoveAt(0);
-                /*
-                int x = image.Width / grid_width;
-                int y = image.Height / grid_height;
-
-                int dx = image.Width % grid_width;
-                int dy = image.Height % grid_height;
-                Image croppedImage;
-                croppedImage = CropImage(this.image, new Rectangle(x * point.X, y * point.Y, x, y));
-                boxes[point.X, point.Y].Image = croppedImage;*/
                 boxes[point.X, point.Y].BackColor = Color.FromArgb(0, 88, 44, 100);
-                //this.Controls.Remove(boxes[point.X, point.Y]);
             }
         }
 
@@ -147,16 +140,16 @@ namespace QuizGame
             return indices;
         } 
 
-        private PictureBox[,] CreatePictureBoxes()
+        private Label[,] CreateLabeles()
         {
             int width = this.ClientRectangle.Width / this.grid_width;
             int height = this.ClientRectangle.Height / this.grid_height;
-            PictureBox[,] boxes = new PictureBox[grid_width,grid_height];
+            Label[,] boxes = new Label[grid_width,grid_height];
             for (int i = 0; i < grid_width; i++)
             {
                 for (int k = 0; k < grid_height; k++)
                 {
-                    PictureBox box = new PictureBox
+                    Label box = new Label
                     {
                         Width = width,
                         Height = height
@@ -164,7 +157,6 @@ namespace QuizGame
                     box.Location = new Point(i * box.Width, k * box.Height);
                     this.Controls.Add(box);
                     box.BackColor = Color.Black;
-                    box.SizeMode = PictureBoxSizeMode.StretchImage;
                     boxes[i, k] = box;
                 }
             }

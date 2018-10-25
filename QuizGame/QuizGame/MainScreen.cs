@@ -17,11 +17,12 @@ namespace QuizGame
         {
             InitializeComponent();
             this.game = game;
+            this.Name = "QuizGame";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             foreach (var turn in game.getTurns())
             {
                 Button newButton = new TurnButton(turn);
-                newButton.Text = turn.name;
+                newButton.Scale(4);
                 TurnPanel.Controls.Add(newButton);
             }
         }
@@ -29,11 +30,21 @@ namespace QuizGame
         private void timer1_Tick(object sender, EventArgs e)
         {
             Answer answer = Program.ws.get_Answer();
-            if(answer != null && !Game.TeamExists(answer.TeamName)){
+            if(answer != null && !Game.teams.ContainsKey(answer.TeamName)){
                 game.AddTeam(new Team(answer.TeamName, Color.Red));
                 teamLabel.Text += $"\n{answer.TeamName}";
 
             }
+        }
+       public void ShowPoints()
+        {
+            MessageBox.Show("Showing points");
+            teamLabel.Text = "";
+            foreach(Team team in Game.teams.Values)
+            {
+                teamLabel.Text += $"\n{team.name}       {team.points}";
+            }
+            this.Refresh();
         }
        public void stopTeamAdding()
         {

@@ -11,7 +11,7 @@ namespace QuizGame
     {
         public string name { get; set; }
         public Color color { get; set; }
-        public int points { get; }
+        public int points { get; set; }
 
         public Team(string name, Color color)
         {
@@ -22,7 +22,7 @@ namespace QuizGame
 
         public void give_points(int points)
         {
-            points += points;
+            this.points += points;
         }
         public override bool Equals(object obj)
         {

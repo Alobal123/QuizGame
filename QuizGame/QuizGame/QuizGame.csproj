@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Answer.cs" />
+    <Compile Include="AnswerBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AnswerBox.Designer.cs">
+      <DependentUpon>AnswerBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>

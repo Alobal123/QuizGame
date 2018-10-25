@@ -10,20 +10,8 @@ namespace QuizGame
     class Game
     {
         private string gameFolder;
-        public static List<Team> teams = new List<Team>();
+        public static Dictionary<string, Team> teams = new Dictionary<string, Team>();
         private List<Turn> turns = new List<Turn>();
-
-        public static bool TeamExists(string name)
-        {
-            foreach (var team in teams)
-            {
-                if (team.name == name)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         public Game(string gameFolder)
         {
@@ -33,7 +21,7 @@ namespace QuizGame
 
         public void AddTeam(Team team)
         {
-            teams.Add(team);
+            teams[team.name] = team;
         }
 
         public List<Turn> getTurns()

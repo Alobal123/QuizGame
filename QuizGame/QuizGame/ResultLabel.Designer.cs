@@ -28,29 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.rightResultPanel = new System.Windows.Forms.TableLayoutPanel();
             this.rightAnswerLabel = new System.Windows.Forms.Label();
+            this.okButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // rightResultPanel
+            // 
+            this.rightResultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rightResultPanel.ColumnCount = 1;
+            this.rightResultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.rightResultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.rightResultPanel.Location = new System.Drawing.Point(100, 140);
+            this.rightResultPanel.Name = "rightResultPanel";
+            this.rightResultPanel.RowCount = 2;
+            this.rightResultPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.rightResultPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.rightResultPanel.Size = new System.Drawing.Size(600, 400);
+            this.rightResultPanel.TabIndex = 0;
             // 
             // rightAnswerLabel
             // 
-            this.rightAnswerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.rightAnswerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.rightAnswerLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.rightAnswerLabel.Location = new System.Drawing.Point(30, 30);
+            this.rightAnswerLabel.Location = new System.Drawing.Point(100, 20);
             this.rightAnswerLabel.Name = "rightAnswerLabel";
-            this.rightAnswerLabel.Size = new System.Drawing.Size(740, 474);
-            this.rightAnswerLabel.TabIndex = 0;
-            this.rightAnswerLabel.Text = "label1";
+            this.rightAnswerLabel.Size = new System.Drawing.Size(600, 100);
+            this.rightAnswerLabel.TabIndex = 1;
             this.rightAnswerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // okButton
+            // 
+            this.okButton.Location = new System.Drawing.Point(625, 561);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 2;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // ResultLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.okButton);
             this.Controls.Add(this.rightAnswerLabel);
+            this.Controls.Add(this.rightResultPanel);
             this.Name = "ResultLabel";
             this.Size = new System.Drawing.Size(800, 600);
             this.ResumeLayout(false);
@@ -59,6 +84,8 @@
 
         #endregion
 
+        private System.Windows.Forms.TableLayoutPanel rightResultPanel;
         private System.Windows.Forms.Label rightAnswerLabel;
+        private System.Windows.Forms.Button okButton;
     }
 }
