@@ -26,16 +26,19 @@ namespace QuizGame
 
         public void countPoints()
         {
-            int place = 0;
+            bool first = true;
             foreach (var comp in rightResultPanel.Controls)
             {
                 if (comp is AnswerBox)
                 {
                     AnswerBox box = (AnswerBox)comp;
                     if (box.isRight) {
-                        
-                        Game.teams[box.answer.TeamName].give_points(1);
-                        MessageBox.Show($"giving points {Game.teams[box.answer.TeamName].points}");
+                        if (first)
+                        {
+                            Game.teams[box.answer.TeamName].give_points(3);
+                            first = false;
+                        }
+                        else { Game.teams[box.answer.TeamName].give_points(1); }
                     }
                 }
             }

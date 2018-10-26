@@ -38,7 +38,6 @@ namespace QuizGame
         }
        public void ShowPoints()
         {
-            MessageBox.Show("Showing points");
             teamLabel.Text = "";
             foreach(Team team in Game.teams.Values)
             {

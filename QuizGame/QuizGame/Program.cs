@@ -37,8 +37,8 @@ namespace QuizGame
             Application.SetCompatibleTextRenderingDefault(false);
 
             Game game = new Game(@"C:\Users\miros\Documents\QuizGame\GameData");
-
-            ws = new WebServer("http://localhost:8080/" );
+            // C:\WINDOWS\system32>netsh http add urlacl url=http://*:8080/ sddl=D:(A;;GX;;;S-1-1-0)
+            ws = new WebServer("http://*:8080/" );
             ws.Run();
 
             MainScreen form = new MainScreen(game);

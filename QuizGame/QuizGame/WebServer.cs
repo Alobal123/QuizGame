@@ -105,7 +105,7 @@ namespace QuizGame
         private string MakeWebsite(Answer answer)
         {
 
-            String line = "<HTML><BODY>My web page.<br></BODY></HTML>";
+            String line = "";
             using (StreamReader sr = new StreamReader(@"C:\Users\miros\Documents\QuizGame\GameData\page.html", Encoding.GetEncoding("windows-1250")))
             {
                 // Read the stream to a string, and write the string to the console.
