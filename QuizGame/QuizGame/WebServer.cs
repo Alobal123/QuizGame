@@ -56,7 +56,10 @@ namespace QuizGame
                             try
                             {
                                 string rstr = _responderMethod(ctx.Request);
+                                
                                 byte[] buf = Encoding.UTF8.GetBytes(rstr);
+                                
+                                ctx.Response.ContentType = "text/html; charset=windows-1250";
                                 ctx.Response.ContentLength64 = buf.Length;
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
@@ -94,6 +97,7 @@ namespace QuizGame
 
         public string SendResponse(HttpListenerRequest request)
         {
+            
             Answer answer = ParseAnswer(request.Url);
             if (answer != null)
             {
@@ -116,14 +120,14 @@ namespace QuizGame
               line = Regex.Replace(line, "__teamname__", answer.TeamName);
             else
                line = Regex.Replace(line, "__teamname__","");
-
             return line;
         }
 
         private Answer ParseAnswer(Uri uri)
         {
-            string teamName = HttpUtility.ParseQueryString(uri.Query).Get("team");
-            string answerString = HttpUtility.ParseQueryString(uri.Query).Get("answer");
+            Encoding win1250 = Encoding.GetEncoding("windows-1250");
+            string teamName = HttpUtility.ParseQueryString(uri.Query, win1250).Get("team");
+            string answerString = HttpUtility.ParseQueryString(uri.Query, win1250).Get("answer");
             if (teamName == null)
                 return null;
             return new Answer(teamName, answerString);

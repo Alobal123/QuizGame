@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.rightResultPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.rightResultPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.rightAnswerLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -38,15 +38,9 @@
             this.rightResultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rightResultPanel.ColumnCount = 1;
-            this.rightResultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.rightResultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.rightResultPanel.Location = new System.Drawing.Point(100, 140);
             this.rightResultPanel.Name = "rightResultPanel";
-            this.rightResultPanel.RowCount = 2;
-            this.rightResultPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.rightResultPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.rightResultPanel.Size = new System.Drawing.Size(600, 400);
+            this.rightResultPanel.Size = new System.Drawing.Size(600, 550);
             this.rightResultPanel.TabIndex = 0;
             // 
             // rightAnswerLabel
@@ -60,9 +54,9 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(625, 561);
+            this.okButton.Location = new System.Drawing.Point(582, 696);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.Size = new System.Drawing.Size(118, 37);
             this.okButton.TabIndex = 2;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -77,14 +71,14 @@
             this.Controls.Add(this.rightAnswerLabel);
             this.Controls.Add(this.rightResultPanel);
             this.Name = "ResultLabel";
-            this.Size = new System.Drawing.Size(800, 600);
+            this.Size = new System.Drawing.Size(800, 750);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel rightResultPanel;
+        private System.Windows.Forms.FlowLayoutPanel rightResultPanel;
         private System.Windows.Forms.Label rightAnswerLabel;
         private System.Windows.Forms.Button okButton;
     }

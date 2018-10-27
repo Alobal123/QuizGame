@@ -39,15 +39,23 @@ namespace QuizGame
        public void ShowPoints()
         {
             teamLabel.Text = "";
-            foreach(Team team in Game.teams.Values)
+            foreach (KeyValuePair<string, Team> item in Game.teams.OrderBy(key => -1*key.Value.points))
             {
-                teamLabel.Text += $"\n{team.name}       {team.points}";
+    
+                teamLabel.Text += $"\n{item.Key}       {item.Value.points}";
+                
             }
+            
             this.Refresh();
         }
        public void stopTeamAdding()
         {
             timer1.Enabled = false;
+        }
+
+        private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.stopWifi();
         }
     }
 }

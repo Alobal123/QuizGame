@@ -19,10 +19,21 @@ namespace QuizGame
             this.rightAnswerLabel.Text = answer;
             foreach (var a in answers)
             {
-                this.rightResultPanel.Controls.Add(new AnswerBox(a));
-                
+                AnswerBox answerBox = new AnswerBox(a);
+                this.rightResultPanel.Controls.Add(answerBox);
+                if (LevenshteinDistance.Compute(this.rightAnswerLabel.Text, a.AnswerString) < 5)
+                {
+                    answerBox.isRight = true;
+                    answerBox.BackColor = Color.Green;
+                }
+                else
+                {
+                    answerBox.isRight = false;
+                    answerBox.BackColor = Color.Red;
+                }
             }
         }
+
 
         public void countPoints()
         {
