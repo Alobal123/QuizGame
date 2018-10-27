@@ -25,6 +25,7 @@ namespace QuizGame
                 newButton.Scale(4);
                 TurnPanel.Controls.Add(newButton);
             }
+            this.ipLabel.Text = "QUIZ\n123456789\n192.168.137.1:8080"; 
         }
 
         private void timer1_Tick(object sender, EventArgs e)

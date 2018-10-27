@@ -97,16 +97,6 @@ namespace QuizGame
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            Answer newest = Program.ws.get_Answer();
-            if (newest != null && !answers.Contains(newest) && Game.teams.ContainsKey(newest.TeamName))
-            {
-                answers.Add(newest);
-                if(answers.Count == Game.teams.Count)
-                {
-                    this.state = State.showing; 
-                    timer.Interval = speed2;
-                }
-            }
             changePicture(); 
         }
 
@@ -191,5 +181,18 @@ namespace QuizGame
             this.resultLabel = label;
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Answer newest = Program.ws.get_Answer();
+            if (newest != null && !answers.Contains(newest) && Game.teams.ContainsKey(newest.TeamName) && newest.AnswerString!="")
+            {
+                answers.Add(newest);
+                if (answers.Count == Game.teams.Count)
+                {
+                    this.state = State.showing;
+                    timer.Interval = speed2;
+                }
+            }
+        }
     }
 }

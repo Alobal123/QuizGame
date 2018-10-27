@@ -70,17 +70,17 @@ namespace QuizGame
             this.ipLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ipLabel.AutoSize = true;
             this.ipLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ipLabel.Location = new System.Drawing.Point(496, 513);
+            this.ipLabel.Location = new System.Drawing.Point(488, 429);
             this.ipLabel.Name = "ipLabel";
-            this.ipLabel.Size = new System.Drawing.Size(626, 73);
+            this.ipLabel.Size = new System.Drawing.Size(247, 73);
             this.ipLabel.TabIndex = 2;
-            this.ipLabel.Text = "192.168.137.1:8080";
+            this.ipLabel.Text = "ipLabel";
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1134, 595);
+            this.ClientSize = new System.Drawing.Size(1134, 688);
             this.Controls.Add(this.ipLabel);
             this.Controls.Add(this.teamLabel);
             this.Controls.Add(this.TurnPanel);
